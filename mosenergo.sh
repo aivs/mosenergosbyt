@@ -46,7 +46,7 @@ RESPONSE=$(curl -s -c cookie.txt -b cookie.txt -X POST \
 -H "Faces-Request: partial/ajax" \
 -H "X-Requested-With: XMLHttpRequest" \
 --data-urlencode "javax.faces.partial.ajax=true" \
---data-urlencode "javax.faces.source:f_wiz=w_wiz" \
+--data-urlencode "javax.faces.source=f_wiz:w_wiz" \
 --data-urlencode "javax.faces.partial.execute=f_wiz:w_wiz" \
 --data-urlencode "javax.faces.partial.render=f_wiz:w_wiz" \
 --data-urlencode "f_wiz:w_wiz=f_wiz:w_wiz" \
