@@ -5,11 +5,11 @@ PASSWORD="12345678"
 METER_LEVEL="51632"
 
 ###################### LOGIN ######################
-RESPONSE=$(curl -v -c cookie.txt https://lkkbyt.mosenergosbyt.ru/common/login.xhtml)
+RESPONSE=$(curl -s -c cookie.txt https://lkkbyt.mosenergosbyt.ru/common/login.xhtml)
 F_LOGIN=$(echo $RESPONSE | sed -e 's/.*lb_login:f_login:rnd" value="//' -e 's/".*$//')
 VIEWSTATE=$(echo $RESPONSE | sed -e 's/.*javax.faces.ViewState" value="//' -e 's/".*$//')
 
-RESPONSE=$(curl -L -v -c cookie.txt -b cookie.txt -X POST \
+RESPONSE=$(curl -L -s -c cookie.txt -b cookie.txt -X POST \
 --data-urlencode "lb_login:f_login:rnd=$F_LOGIN" \
 --data-urlencode "lb_login:f_login:t_login=$LOGIN" \
 --data-urlencode "lb_login:f_login:t_pwd=$PASSWORD" \
@@ -22,7 +22,7 @@ VIEWSTATE=$(echo $RESPONSE | sed -e 's/.*javax.faces.ViewState" value="//' -e 's
 ####################### GET THE COST ######################
 echo "Показания для ЛС $LOGIN составляют $METER_LEVEL КВт*Ч."
 
-RESPONSE=$(curl -v -c cookie.txt -b cookie.txt -X POST \
+RESPONSE=$(curl -s -c cookie.txt -b cookie.txt -X POST \
 -H "Faces-Request: partial/ajax" \
 -H "X-Requested-With: XMLHttpRequest" \
 --data-urlencode "javax.faces.partial.ajax=true" \
